@@ -4,7 +4,7 @@ import ProjectHeader from "../ProjectHeader";
 import Board from "../BoardView";
 import List from "../ListView";
 import TimeLine from "../TimelineView";
-
+import Table from "../TableView";
 
 
 const page = ({ params }: { params: Promise<{ id: string }> }) => {
@@ -22,6 +22,9 @@ const page = ({ params }: { params: Promise<{ id: string }> }) => {
       )}
       {activeTab === "Timeline" && (
         <TimeLine id={id} setIsModalNewTaskOpen={setIsModelNewTaskOpen} />
+      )}
+      {activeTab === "Table" && (
+        <Table id={id} setIsModalNewTaskOpen={setIsModelNewTaskOpen} />
       )}
     </div>
   );
