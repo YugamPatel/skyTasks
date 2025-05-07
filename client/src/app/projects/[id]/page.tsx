@@ -3,6 +3,8 @@ import { use, useState } from "react";
 import ProjectHeader from "../ProjectHeader";
 import Board from "../BoardView";
 import List from "../ListView";
+import TimeLine from "../TimelineView";
+
 
 
 const page = ({ params }: { params: Promise<{ id: string }> }) => {
@@ -17,6 +19,9 @@ const page = ({ params }: { params: Promise<{ id: string }> }) => {
       )}
       {activeTab === "List" && (
         <List id={id} setIsModalNewTaskOpen={setIsModelNewTaskOpen} />
+      )}
+      {activeTab === "Timeline" && (
+        <TimeLine id={id} setIsModalNewTaskOpen={setIsModelNewTaskOpen} />
       )}
     </div>
   );
