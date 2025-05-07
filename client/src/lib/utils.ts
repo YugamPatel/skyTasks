@@ -13,7 +13,13 @@ export const dataGridSxStyles = (isDarkMode: boolean) => {
     "& .MuiDataGrid-selectedRowCount": {
       color: `${isDarkMode ? "#e5e7eb" : ""}`,
     },
+    "& .MuiDataGrid-iconButtonContainer": {
+      color: `${isDarkMode ? "#e5e7eb" : ""}`,
+    },
     "& .MuiIconbutton-root": {
+      color: `${isDarkMode ? "#a3a3a3" : ""}`,
+    },
+    "& .MuiDataGrid-menuIcon": {
       color: `${isDarkMode ? "#a3a3a3" : ""}`,
     },
     "& .MuiTablePagination-root": {
