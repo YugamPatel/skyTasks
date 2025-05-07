@@ -1,7 +1,9 @@
 "use client";
 import { use, useState } from "react";
 import ProjectHeader from "../ProjectHeader";
-import BoardView from "../BoardView";
+import Board from "../BoardView";
+import List from "../ListView";
+
 
 const page = ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = use(params);
@@ -11,7 +13,10 @@ const page = ({ params }: { params: Promise<{ id: string }> }) => {
     <div>
       <ProjectHeader activeTab={activeTab} setActiveTab={setActiveTab} />
       {activeTab === "Board" && (
-        <BoardView id={id} setIsModalNewTaskOpen={setIsModelNewTaskOpen} />
+        <Board id={id} setIsModalNewTaskOpen={setIsModelNewTaskOpen} />
+      )}
+      {activeTab === "List" && (
+        <List id={id} setIsModalNewTaskOpen={setIsModelNewTaskOpen} />
       )}
     </div>
   );

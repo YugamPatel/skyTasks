@@ -7,7 +7,6 @@ import { EllipsisVertical, MessageSquareMore, Plus } from "lucide-react";
 import Image from "next/image";
 
 type BoardProps = {
-  // Define the props for the Board component here
   id: string;
   setIsModalNewTaskOpen: (isOpen: boolean) => void;
 };
@@ -52,32 +51,40 @@ type TaskColumnProps = {
   setIsModalNewTaskOpen: (isOpen: boolean) => void;
 };
 
+// TaskColumn first destructures the props and then uses the useDrop hook to create a drop target for tasks. It also filters the tasks based on their status and renders them using the Task component.
 const TaskColumn = ({
   status,
   tasks,
   moveTask,
   setIsModalNewTaskOpen,
 }: TaskColumnProps) => {
+
+
   const [{ isOver }, drop] = useDrop({
-    accept: "task",
+    // Collects the isOver state from the drop target
+    accept: "task", // Only accept draggable items labeled with type "task"
     drop: (item: { id: number }) => {
-      moveTask(item.id, status);
+      // Called when a compatible item is dropped
+      moveTask(item.id, status); //   Invoke moveTask with the dropped item's id and the current status
     },
     collect: (monitor) => ({
-      isOver: !!monitor.isOver(),
+      // Collect properties from the drag-and-drop monitor
+      isOver: !!monitor.isOver(), //   Convert monitor.isOver() (which may be undefined) into a boolean
     }),
   });
 
   const tasksCount = tasks.filter((task) => task.status === status).length;
-  const statusColor = {
+
+  const statusColor: Record<string, string> = {
     "To Do": "#2563eb",
     "In Progress": "#059669",
     "Under Review": "#D97706",
     Completed: "#000000",
   };
+
   return (
     <div
-      ref={(instance) => drop(instance)}
+      ref={(instance) => { drop(instance); }} // assign a ref callback that receives the DOM element (instance) and forwards it to the drop() handler
       className={`sl:py-4 rounded-lg p-4 shadow-md ${isOver ? "bg-blue-100 dark:bg-neutral-950" : ""} xl:px-2`}
     >
       <div className="mb-3 flex w-full">
@@ -123,6 +130,8 @@ type TaskProps = {
 };
 
 const Task = ({ task }: TaskProps) => {
+
+    
   const [{ isDragging }, drag] = useDrag(() => ({
     type: "task",
     item: { id: task.id },
