@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { useState } from "react";
+import { setIsSidebarCollapsed } from "@/state";
 import {
   ChartNetwork,
   LockIcon,
@@ -19,9 +20,10 @@ import {
   AlertTriangle,
   AlertOctagon,
   Layers3,
+  X,
 } from "lucide-react";
 import Link from "next/link";
-import { useAppSelector,useAppDispatch } from "@/app/redux";
+import { useAppSelector, useAppDispatch } from "@/app/redux";
 import { usePathname } from "next/navigation";
 import { useGetProjectsQuery } from "@/state/api";
 
@@ -36,11 +38,10 @@ const Sidebar = () => {
     (state) => state.global.isSidebarCollapsed,
   );
   const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
-
   const sidebarClassNames = `fixed flex flex-col h-[100%] justify-between shadow-xl
-  transition-all duration-300 h-full z-40 dark:bg-black overflow-y-auto bg-white w-64
+  transition-all duration-300 h-full z-40 dark:bg-black overflow-y-auto bg-white
+  ${isSidebarCollapsed ? "w-0 hidden" : "w-64"}
 `;
-
   return (
     <div className={sidebarClassNames}>
       <div className="flex h-[100%] w-full flex-col justify-start">
@@ -54,6 +55,16 @@ const Sidebar = () => {
             />
             SKYTASK
           </div>
+          {isSidebarCollapsed ? null : (
+            <button
+              className="py-3"
+              onClick={() => {
+                dispatch(setIsSidebarCollapsed(!isSidebarCollapsed));
+              }}
+            >
+              <X className="h-6 w-6 text-gray-800 hover:text-gray-500 dark:text-white" />
+            </button>
+          )}
         </div>
 
         {/* SIDEBAR CONTENT */}
