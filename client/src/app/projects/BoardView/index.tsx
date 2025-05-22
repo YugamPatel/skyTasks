@@ -176,7 +176,7 @@ const Task = ({ task }: TaskProps) => {
       {task.attachments && task.attachments.length > 0 && (
         <div className="h-auto w-full overflow-hidden rounded-t-md p-2">
           <Image
-            src={`/${task.attachments[0].fileURL}`}
+            src={`https://pm-s3-bucket-yugam.s3.us-east-2.amazonaws.com/${task.attachments[0].fileURL}`}
             alt={task.attachments[0].fileName}
             width={400}
             height={200}
@@ -228,7 +228,7 @@ const Task = ({ task }: TaskProps) => {
           <div className="flex -space-x-[6px] overflow-hidden">
             {task.assignee && (
               <Image
-                src={`/${task.assignee.profilePictureUrl}`}
+                src={`https://pm-s3-bucket-yugam.s3.us-east-2.amazonaws.com/${task.assignee.profilePictureUrl}`}
                 alt={task.assignee.username}
                 width={30}
                 height={30}
@@ -237,7 +237,7 @@ const Task = ({ task }: TaskProps) => {
             )}
             {task.author && (
               <Image
-                src={`/${task.author.profilePictureUrl}`}
+                src={`https://pm-s3-bucket-yugam.s3.us-east-2.amazonaws.com/${task.author.profilePictureUrl}`}
                 alt={task.author.username}
                 width={30}
                 height={30}
