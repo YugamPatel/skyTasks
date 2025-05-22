@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useRef } from "react";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import {
@@ -9,7 +10,6 @@ import {
 import globalReducer from "@/state";
 import { api } from "@/state/api";
 import { setupListeners } from "@reduxjs/toolkit/query";
-
 import {
   persistStore,
   persistReducer,
@@ -26,12 +26,15 @@ import createWebStorage from "redux-persist/lib/storage/createWebStorage";
 /* REDUX PERSISTENCE */
 const createNoopStorage = () => {
   return {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     getItem(_key: any) {
       return Promise.resolve(null);
     },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     setItem(_key: any, value: any) {
       return Promise.resolve(value);
     },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     removeItem(_key: any) {
       return Promise.resolve();
     },
@@ -81,7 +84,7 @@ export default function StoreProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const storeRef = useRef<AppStore>();
+  const storeRef = useRef<AppStore>(null);
   if (!storeRef.current) {
     storeRef.current = makeStore();
     setupListeners(storeRef.current.dispatch);

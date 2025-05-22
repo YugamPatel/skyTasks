@@ -58,8 +58,6 @@ const TaskColumn = ({
   moveTask,
   setIsModalNewTaskOpen,
 }: TaskColumnProps) => {
-
-
   const [{ isOver }, drop] = useDrop({
     // Collects the isOver state from the drop target
     accept: "task", // Only accept draggable items labeled with type "task"
@@ -84,7 +82,9 @@ const TaskColumn = ({
 
   return (
     <div
-      ref={(instance) => { drop(instance); }} // assign a ref callback that receives the DOM element (instance) and forwards it to the drop() handler
+      ref={(instance) => {
+        drop(instance);
+      }} // assign a ref callback that receives the DOM element (instance) and forwards it to the drop() handler
       className={`sl:py-4 rounded-lg p-4 shadow-md ${isOver ? "bg-blue-100 dark:bg-neutral-950" : ""} xl:px-2`}
     >
       <div className="mb-3 flex w-full">
@@ -130,11 +130,10 @@ type TaskProps = {
 };
 
 const Task = ({ task }: TaskProps) => {
-
-    
   const [{ isDragging }, drag] = useDrag(() => ({
     type: "task",
     item: { id: task.id },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     collect: (monitor: any) => ({
       isDragging: !!monitor.isDragging(),
     }),

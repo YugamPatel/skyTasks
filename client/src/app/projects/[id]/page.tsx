@@ -7,7 +7,7 @@ import TimeLine from "../TimelineView";
 import Table from "../TableView";
 import ModalNewTask from "@/components/ModalNewtask";
 
-const page = ({ params }: { params: Promise<{ id: string }> }) => {
+const Project = ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = use(params);
   const [activeTab, setActiveTab] = useState("Board");
   const [isModelNewTaskOpen, setIsModelNewTaskOpen] = useState(false);
@@ -37,4 +37,4 @@ const page = ({ params }: { params: Promise<{ id: string }> }) => {
   );
 };
 
-export default page;
+export default Project;

@@ -11,13 +11,11 @@ const ListView = ({ id, setIsModalNewTaskOpen }: ListProps) => {
   const input = {
     projectId: Number(id),
   };
-  const { data: tasks, isLoading, error } = useGetTasksQuery(input);
-  {
-    isLoading && <div>Loading...</div>;
-  }
-  {
-    error && <div>Error loading tasks</div>;
-  }
+  const { data: tasks, error, isLoading } = useGetTasksQuery(input);
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>An error occurred while fetching tasks</div>;
+
   return (
     <div className="px-4 pb-8 xl:px-6">
       <div className="pt-5">
