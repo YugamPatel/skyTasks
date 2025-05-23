@@ -5,11 +5,7 @@ import Header from "@/components/Header";
 import ModalNewTask from "@/components/ModalNewtask";
 import TaskCard from "@/components/TaskCard";
 import { dataGridClassNames, dataGridSxStyles } from "@/lib/utils";
-import {
-  Priority,
-  Task,
-  useGetTasksByUserQuery,
-} from "@/state/api";
+import { Priority, Task, useGetAuthUserQuery, useGetTasksByUserQuery } from "@/state/api";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import React, { useState } from "react";
 
@@ -33,7 +29,7 @@ const columns: GridColDef[] = [
     headerName: "Status",
     width: 130,
     renderCell: (params) => (
-      <span className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">
+      <span className="inline-flex rounded-full bg-green-100 px-2 text-xs leading-5 font-semibold text-green-800">
         {params.value}
       </span>
     ),
@@ -76,7 +72,8 @@ const ReusablePriorityPage = ({ priority }: Props) => {
   const [view, setView] = useState("list");
   const [isModalNewTaskOpen, setIsModalNewTaskOpen] = useState(false);
 
-  const userId = 1;
+  const { data: currentUser } = useGetAuthUserQuery({});
+  const userId = currentUser?.userDetails?.userId ?? null;
   const {
     data: tasks,
     isLoading,
@@ -84,7 +81,7 @@ const ReusablePriorityPage = ({ priority }: Props) => {
   } = useGetTasksByUserQuery(userId || 0, {
     skip: userId === null,
   });
-
+  
   const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
 
   const filteredTasks = tasks?.filter(
