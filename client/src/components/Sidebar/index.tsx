@@ -90,7 +90,7 @@ const Sidebar = () => {
           />
           <div>
             <h3 className="text-md font-bold tracking-wide dark:text-gray-200">
-              YUG TEAM
+              TEAMS
             </h3>
             <div className="mt-1 flex items-start gap-2">
               <LockIcon className="mt-[0.1rem] h-3 w-3 text-gray-500 dark:text-gray-400" />
@@ -170,7 +170,7 @@ const Sidebar = () => {
           </>
         )}
       </div>
-      
+
       <div className="z-10 mt-32 flex w-full flex-col items-center gap-4 bg-white px-8 py-4 md:hidden dark:bg-black">
         <div className="flex w-full items-center">
           <div className="align-center flex h-9 w-9 justify-center">
