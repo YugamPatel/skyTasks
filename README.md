@@ -1,6 +1,6 @@
 ## SkyTask
 
-> **SkyTask** is a cloud‑native project‑management dashboard—personally built and inspired by tools like Jira—fully hosted on AWS, so your tasks stay as scalable as the sky.
+> **SkyTask** is a cloud‑native project‑management dashboard—personally built and inspired by tools like Jira—fully hosted on AWS.
 
 ![SkyTask dashboard](./assets/skytask-dashboard.png)
 
