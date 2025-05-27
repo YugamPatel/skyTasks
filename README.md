@@ -68,10 +68,7 @@
 |                    | ESLint + Prettier         | 9 / 3.x                                | Tailwind plugin                        |
 |                    | Concurrency tooling       | `concurrently`, `nodemon`, `ts‑node`   |                                        |
 
-## Database & Prisma Layer
-
-The app uses **PostgreSQL 15** on AWS RDS, with Prisma ORM (code‑first).  
-Below is the current ER diagram (generated from the Prisma schema).
+## Database
 
 ### Entity‑relationship overview
 
@@ -90,35 +87,9 @@ Below is the current ER diagram (generated from the Prisma schema).
 | **Attachment**     | `id` PK, `fileUrl`, `fileName`, `taskId` FK, `uploadedById` FK                                                                                       | files linked to tasks                                                                                                                |
 | **ProjectTeam**    | `(id, teamId FK, projectId FK)`                                                                                                                      | joins **Project** ⇆ **Team** (many teams per project)                                                                                |
 
-| Item               | Value             |
-| ------------------ | ----------------- |
-| **DB identifier**  | `pm‑rds`          |
-| **Instance class** | `db.t4g.micro`    |
-| **Region / AZ**    | us‑east‑2a (Ohio) |
-| **Engine**         | PostgreSQL15      |
-| **Primary ORM**    | Prisma 6.6        |
-
 ![AWS RDS console – pm‑rds instance](./assets/rds‑pm‑rds.png "AWS RDS console showing the pm‑rds PostgreSQL instance")
 
-### Migrations & Seeding
-
-- **Prisma Migrate** keeps schema in Git: `prisma/migrations/`.
-- Seed script: `npm run seed` ➜ runs `prisma/seed.ts` to create demo users, a sample team, and mock tasks.
-
-### Backend On EC2 With PM2
-
-| Layer         | Technology                     | Version  | Notes                           |
-| ------------- | ------------------------------ | -------- | ------------------------------- |
-| Runtime       | Node.js                        | 20 LTS   | via NVM                         |
-| Web framework | Express                        | 5.1.0    | REST API                        |
-| Language      | TypeScript                     | 5.x      | strict mode                     |
-| ORM           | Prisma                         | 6.6.0    | code‑first schema               |
-| Database      | PostgreSQL                     | 15 (RDS) | instance `db.t4g.micro`         |
-| Auth          | AWS Cognito                    | —        | JWT tokens verified per request |
-| Utilities     | Helmet, CORS, Morgan           | —        | security, logging               |
-| Dev Tooling   | ts‑node, Nodemon, Concurrently | —        | live reload                     |
-
-### PM2: Process manager
+### PM2: Process manager (For EC2 Instances)
 
 #### Used PM2 to keep the Node.js API stable and easy to manage in production.
 
